@@ -162,8 +162,8 @@ class PlayerTrackingBullet extends PlayerBullet
     distanceTracking = 10000;
     for(Enemy en: enemies)
     {
-      int dist = distanceToEnemy(en);
-      if(dist < distanceTracking)
+      int dist = this.distanceToEnemy(en);
+      if(dist > 0 && dist < distanceTracking)
       {
         enemyTracked = en;
         distanceTracking = dist;
@@ -177,6 +177,8 @@ class PlayerTrackingBullet extends PlayerBullet
 
   private int distanceToEnemy(Enemy en)
   {
+    if(en == null) { return -1; } // Handle Null Pointers
+
     int deltaX = en.getX() - bulletX;
     int deltaY = en.getY() - bulletY;
     int distanceEn = (int) Math.sqrt(deltaX * deltaX - deltaY * deltaY);
@@ -186,9 +188,23 @@ class PlayerTrackingBullet extends PlayerBullet
   @Override
   public void updateBullet()
   {
-    bulletY += bulletSpeed;
-    if(enemyTracked.getX() > bulletX) { bulletX += bulletSpeed; }
-    else if(enemyTracked.getX() < bulletX) { bulletX -= bulletSpeed; }
+    //find vector to follow and then follow it using components
+    int dist = this.distanceToEnemy(enemyTracked);
+    int velocityX;
+    int velocityY;
+
+    if(dist > 0){
+      velocityY = bulletSpeed * ( enemyTracked.getY() - bulletY ) / dist;
+      velocityX = bulletSpeed * ( enemyTracked.getX() - bulletX ) / dist;
+    }
+    else
+    {
+      velocityX = 0;
+      velocityY = -bulletSpeed;
+    }
+
+    bulletX -= velocityX;
+    bulletY -= velocityY;
   }
 
 }
