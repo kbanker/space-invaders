@@ -1,4 +1,5 @@
 import java.lang.*;
+import java.util.ArrayList;
 
 /**
 Class to track bullets
@@ -139,4 +140,55 @@ class PlayerBullet extends Bullet
   {
     super(x, y, size, speed, damage);
   }
+}
+
+/**
+Subclass of Player Bullets that track a enemy
+@author Kush Banker
+@version 15.11.19
+*/
+class PlayerTrackingBullet extends PlayerBullet
+{
+  private Enemy enemyTracked;
+  private int distanceTracking;
+  // Constructor
+  public PlayerTrackingBullet(int x, int y, int size, int speed, int damage)
+  {
+    super(x, y, size, speed, damage);
+  }
+
+  public void trackEnemy(ArrayList<Enemy> enemies)
+  {
+    distanceTracking = 10000;
+    for(Enemy en: enemies)
+    {
+      int dist = distanceToEnemy(en);
+      if(dist < distanceTracking)
+      {
+        enemyTracked = en;
+        distanceTracking = dist;
+      }
+    }
+  }
+  public boolean isTracking()
+  {
+    return enemyTracked != null;
+  }
+
+  private int distanceToEnemy(Enemy en)
+  {
+    int deltaX = en.getX() - bulletX;
+    int deltaY = en.getY() - bulletY;
+    int distanceEn = (int) Math.sqrt(deltaX * deltaX - deltaY * deltaY);
+    return distanceEn;
+  }
+
+  @Override
+  public void updateBullet()
+  {
+    bulletY += bulletSpeed;
+    if(enemyTracked.getX() > bulletX) { bulletX += bulletSpeed; }
+    else if(enemyTracked.getX() < bulletX) { bulletX -= bulletSpeed; }
+  }
+
 }

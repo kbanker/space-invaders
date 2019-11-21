@@ -144,6 +144,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
 
       for(PlayerBullet b: player.getBullets())
       {
+         if(b instanceof PlayerTrackingBullet && !((PlayerTrackingBullet) b).isTracking())
+         { ((PlayerTrackingBullet) b).trackEnemy(enemies); }
          if (b.getY() < 0)
          {
             bulletsRemo.add(b);

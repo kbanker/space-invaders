@@ -223,7 +223,7 @@ class Player
     {
       if(gun == 1 || gun == 3)
       {
-        PlayerBullet b = new PlayerBullet(centerX, centerY, bulletSize, -bulletSpeed, weaponDamage);
+        PlayerBullet b = new PlayerTrackingBullet(centerX, centerY, bulletSize, -bulletSpeed, weaponDamage);
         bullets.add(b);
       }
       else if(gun == 2)
