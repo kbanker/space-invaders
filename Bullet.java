@@ -151,24 +151,35 @@ class PlayerTrackingBullet extends PlayerBullet
 {
   private Enemy enemyTracked;
   private int distanceTracking;
+
+  private int velocityX;
+  private int velocityY;
+  private int accelerationX;
+
+  private ArrayList<Enemy> enemies;
+
   // Constructor
   public PlayerTrackingBullet(int x, int y, int size, int speed, int damage)
   {
     super(x, y, size, speed, damage);
+    velocityX = 0;
+    velocityY = bulletSpeed;
   }
 
   public void trackEnemy(ArrayList<Enemy> enemies)
   {
-    distanceTracking = 10000;
+    this.enemies = enemies;
+    distanceTracking = 100;
     for(Enemy en: enemies)
     {
-      int dist = this.distanceToEnemy(en);
-      if(dist > 0 && dist < distanceTracking)
+      int distX = en.getX() - bulletX;
+      if(distX < 100 && distX > -100)
       {
         enemyTracked = en;
-        distanceTracking = dist;
+        distanceTracking = distX;
       }
     }
+    if(this.isTracking()) { this.updateVelocity(); }
   }
   public boolean isTracking()
   {
@@ -185,26 +196,30 @@ class PlayerTrackingBullet extends PlayerBullet
     return distanceEn;
   }
 
+  //find vector to follow and then follow it using components
+  private void updateVelocity()
+  {
+    int distX = enemyTracked.getX() - bulletX;
+    accelerationX = (int) Math.sqrt(this.distanceToEnemy(enemyTracked));
+    //velocityY = bulletSpeed;
+    if(Math.abs(accelerationX) > 10)
+    {
+      if(distX > 0) { velocityX += accelerationX; }
+      else { velocityX -= accelerationX; }
+    }
+  }
+
   @Override
   public void updateBullet()
   {
-    //find vector to follow and then follow it using components
-    int dist = this.distanceToEnemy(enemyTracked);
-    int velocityX;
-    int velocityY;
-
-    if(dist > 0){
-      velocityY = bulletSpeed * ( enemyTracked.getY() - bulletY ) / dist;
-      velocityX = bulletSpeed * ( enemyTracked.getX() - bulletX ) / dist;
-    }
-    else
+    if(this.isTracking())
     {
-      velocityX = 0;
-      velocityY = -bulletSpeed;
+      this.updateVelocity();
+      //if(enemyTracked.getY() < bulletY) { enemyTracked = null; }
     }
 
-    bulletX -= velocityX;
-    bulletY -= velocityY;
+    bulletX += velocityX;
+    bulletY += velocityY;
   }
 
 }
