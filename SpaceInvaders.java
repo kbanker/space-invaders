@@ -94,7 +94,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
 
      g.drawImage(player.getImage(), player.getX(), player.getY(), null);
 
-     if(player.getLives() <= 0) { gameRunning = false; }
+     if(player.getLives() <= -8) { gameRunning = false; }
    }
    public void updateEnemies(Graphics g)
    {

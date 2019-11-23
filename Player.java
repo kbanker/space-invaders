@@ -152,6 +152,11 @@ class Player
   }
   public void updatePlayerArt()
   {
+    if(livesLeft <= 0)
+    {
+      imgFileName = "img/explode" + livesLeft + ".png";
+      livesLeft -= 1;
+    }
     if(playerLevel == 4)
     {
       int fourloop = 1;
