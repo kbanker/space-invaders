@@ -191,7 +191,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
           {
              int size = b.getDiam();
 
-             g2.setColor(Color.ORANGE);
+             g2.setColor(Color.RED);
              Ellipse2D.Double bulletGraphic = new Ellipse2D.Double(b.getX(), b.getY(), b.getDiam(), b.getDiam());
              g2.fill(bulletGraphic);
 
