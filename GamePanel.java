@@ -68,14 +68,14 @@ class HelpPanel extends GamePanel
     super(listener);
 
     menuButton = new JButton(new ImageIcon("img/menu.png"));
-    menuButton.setBounds(30, 340, 175, 65);
+    menuButton.setBounds(605, 20, 175, 65);
 
     this.add(menuButton);
 
     menuButton.setActionCommand("menuScreen");
     menuButton.addActionListener(listener);
 
-    imgFileName = "img/background.png";
+    imgFileName = "img/help.png";
     this.loadImg();
   }
 }
@@ -102,7 +102,7 @@ class MenuPanel extends GamePanel
     startButton.setActionCommand("startGame");
     startButton.addActionListener(listener);
 
-    helpButton = new JButton(new ImageIcon("img/help.png"));
+    helpButton = new JButton(new ImageIcon("img/helpButton.png"));
     helpButton.setBounds(45, 330, 190, 60);
 
     this.add(helpButton);
@@ -141,22 +141,22 @@ class EndPanel extends GamePanel implements ActionListener
     this.seconds = seconds;
 
     //Restart button
-    startButton = new JButton("RESTART");
-    startButton.setBounds(30, 270, 195, 60);
+    startButton = new JButton(new ImageIcon("img/restart.png"));
+    startButton.setBounds(20, 20, 210, 60);
     this.add(startButton);
     startButton.setActionCommand("startGame");
     startButton.addActionListener(listener);
 
     //menu button
-    menuButton = new JButton("MENU");
-    menuButton.setBounds(30, 340, 195, 60);
+    menuButton = new JButton(new ImageIcon("img/menu.png"));
+    menuButton.setBounds(20, 100, 175, 60);
     this.add(menuButton);
     menuButton.setActionCommand("menuScreen");
     menuButton.addActionListener(listener);
 
     //Enter name text box
     nameTextField = new JTextField(20);
-    nameTextField.setBounds(400, 280, 100, 30);
+    nameTextField.setBounds(400, 310+83, 100, 30);
     this.add(nameTextField);
     nameTextField.setActionCommand("nameEntered");
     nameTextField.addActionListener(this);
@@ -166,7 +166,7 @@ class EndPanel extends GamePanel implements ActionListener
     scoreDisplayTextArea.setEditable(false);
 
     scoreDisplayPane = new JScrollPane(scoreDisplayTextArea);
-    scoreDisplayPane.setBounds(600, 300, 180, 200);
+    scoreDisplayPane.setBounds(600, 320, 180, 200);
     this.add(scoreDisplayPane);
 
     scoreDisplayTextArea.setBackground(Color.BLACK);
@@ -200,9 +200,9 @@ class EndPanel extends GamePanel implements ActionListener
 
     //Score and time
     g.setColor(Color.WHITE);
-    g.drawString("Name: ", WINDOW_WIDTH/2 - 50, WINDOW_HEIGHT/2);
-    g.drawString("You scored: " + score + " pts", WINDOW_WIDTH/2, WINDOW_HEIGHT/2 + 50);
-    g.drawString("You survived for " + seconds + " seconds", WINDOW_WIDTH/2, WINDOW_HEIGHT/2 + 100);
+    g.drawString("Name: ", 350, 330+83);
+    g.drawString("You scored: " + score + " pts", 400, 443);
+    g.drawString("You survived for " + seconds + " seconds", 400, 463);
   }
 
   public void actionPerformed(ActionEvent e)
