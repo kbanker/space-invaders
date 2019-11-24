@@ -55,7 +55,7 @@ class Player
     playerWidth = 55;
     playerHeight = 60;
 
-    playerSpeed = 20;
+    playerSpeed = 40;
 
     livesLeft = 10;
 
