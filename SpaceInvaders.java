@@ -241,6 +241,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
 
       if(keyCode == KeyEvent.VK_SPACE) { player.shoot(); }
       else if(keyCode == KeyEvent.VK_C) { player.changeWeapon(); }
+      else if(keyCode == KeyEvent.VK_LEFT) { player.move(false); }
+      else if(keyCode == KeyEvent.VK_RIGHT) { player.move(true); }
    }
    public void keyReleased(KeyEvent e){}
    public void keyTyped(KeyEvent e){}

@@ -17,6 +17,8 @@ class Player
   private int playerWidth;
   private int playerHeight;
 
+  private int playerSpeed;
+
   private int centerX;
   private int centerY;
 
@@ -52,6 +54,8 @@ class Player
     playerY = 490;
     playerWidth = 55;
     playerHeight = 60;
+
+    playerSpeed = 20;
 
     livesLeft = 10;
 
@@ -214,6 +218,12 @@ class Player
   public void setY(int y)
   {
     playerY = y;
+  }
+
+  public void move(boolean right)
+  {
+    if(right) { playerX += playerSpeed; }
+    else { playerX -= playerSpeed; }
   }
 
   // Manage player bullets
