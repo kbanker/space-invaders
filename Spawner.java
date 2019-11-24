@@ -17,7 +17,8 @@ class Spawner
   public static final int MINI_SPAWN_RATE_MS = 7000;
 
   public static final int MINI_SPAWN_RATE_WAVE_MS = 300;
-  public static final int MINIS_PER_WAVE = 5;
+
+  private int minisPerWave;
 
   private int alienTimer;
   private int twinTimer;
@@ -80,8 +81,7 @@ class Spawner
     // Mini
     if(miniWave)
     {
-
-      if(miniWaveCt >= MINIS_PER_WAVE)
+      if(miniWaveCt >= minisPerWave)
       {
         miniWave = false;
       }
@@ -99,6 +99,7 @@ class Spawner
       miniTimer = 0;
       miniWave = true;
       miniWaveCt = 0;
+      minisPerWave = (int) (Math.random() * 5 + 2);
 
       miniWaveX = (int) (Math.random()*(WINDOW_WIDTH-120) + 60);
     }
