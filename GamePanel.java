@@ -7,7 +7,8 @@ import javax.imageio.ImageIO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.TreeSet;
+import java.util.NavigableSet;
 
 /**
 Abstract class for panels
@@ -182,7 +183,7 @@ class EndPanel extends GamePanel implements ActionListener
   public void updateScoreDisplay()
   {
     HashMap<Integer, String> scoresAndNames = windowManager.getHighScores();
-    Set<Integer> scores = scoresAndNames.keySet();
+    NavigableSet<Integer> scores = (new TreeSet<Integer>(scoresAndNames.keySet())).descendingSet();
 
     scoreDisplayTextArea.setText("");
 
