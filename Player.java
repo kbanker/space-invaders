@@ -156,6 +156,7 @@ class Player
   }
   public void updatePlayerArt()
   {
+    if(livesLeft == 0) { SoundHandler.playSound("sound/explode.wav"); }
     if(livesLeft <= 0)
     {
       imgFileName = "img/explode" + livesLeft + ".png";
@@ -249,6 +250,7 @@ class Player
         bullets.add(bullet1);
         bullets.add(bullet2);
       }
+      SoundHandler.playSound("sound/shoot.wav");
     }
   }
   public ArrayList<PlayerBullet> getBullets()
@@ -289,6 +291,7 @@ class Player
     livesLeft -= damage;
     imgFileLife = "img/" + livesLeft + ".png";
 
+    SoundHandler.playSound("sound/hit.wav");
     this.updateLives();
   }
   public int getLives()
