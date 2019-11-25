@@ -29,6 +29,8 @@ public class WindowManager implements ActionListener
     window.add(currentPanel);
     window.pack();
     window.setVisible(true);
+
+    SoundHandler.playSong("sound/New-Hope.wav");
   }
 
   public void updatePanel(JPanel panel)
@@ -91,6 +93,7 @@ public class WindowManager implements ActionListener
     {
       this.updatePanel(new SpaceInvaders(this, window));
       this.setWindowCursor();
+      SoundHandler.playSong("sound/start.wav");
     }
     else if(command.equals("helpScreen"))
     {
@@ -99,9 +102,12 @@ public class WindowManager implements ActionListener
     }
     else if(command.equals("menuScreen"))
     {
+      if(currentPanel instanceof EndPanel) { SoundHandler.playSong("sound/New-Hope.wav"); }
+
       this.updatePanel(new MenuPanel(this));
       this.resetWindowCursor();
     }
+    else if(command.equals("mute")) { SoundHandler.mute(); }
   }
 
   /**

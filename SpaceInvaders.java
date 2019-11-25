@@ -95,6 +95,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
      g.drawImage(player.getImage(), player.getX(), player.getY(), null);
 
      if(player.getLives() <= -8) { gameRunning = false; }
+
+     if(timeElapsed == 2000) { SoundHandler.playSong("sound/Boss-Fight.wav"); }
    }
    public void updateEnemies(Graphics g)
    {
@@ -132,6 +134,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
        else if(en instanceof Mini) { player.score(2); }
 
        enemies.remove(en);
+       SoundHandler.playSound("sound/endie.wav");
      }
    }
 
@@ -305,6 +308,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       }
       else
       {
+        SoundHandler.playSound("sound/end.wav");
+
         timer.stop();
         windowManager.updatePanel(new EndPanel(windowManager, player.getScore(), (int) (timeElapsed / 1000)));
         windowManager.resetWindowCursor();

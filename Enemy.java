@@ -209,6 +209,8 @@ class Alien extends Enemy
     EnemyBullet enBullet = new EnemyBullet(this.getX() + this.getWidth()/2, this.getY() + this.getHeight());
     bullets.add(enBullet);
 
+    SoundHandler.playSound("sound/alshoot.wav");
+
     this.resetTimer();
   }
 }
@@ -246,6 +248,8 @@ class Twin extends Enemy
     bullets.add(enBullet1);
     bullets.add(enBullet2);
 
+    SoundHandler.playSound("sound/twshoot.wav");
+
     this.resetTimer();
   }
 }
@@ -276,6 +280,8 @@ class Cannon extends Enemy
   {
     EnemyMissile enMissile = new EnemyMissile(getX() + this.getWidth()/2, this.getY() + this.getHeight());
     bullets.add(enMissile);
+
+    SoundHandler.playSound("sound/cashoot.wav");
 
     this.resetTimer();
   }
