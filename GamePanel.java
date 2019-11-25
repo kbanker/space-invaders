@@ -89,6 +89,7 @@ class MenuPanel extends GamePanel
 {
   private JButton startButton;
   private JButton helpButton;
+  private JButton muteButton;
 
   public MenuPanel(WindowManager listener)
   {
@@ -109,6 +110,14 @@ class MenuPanel extends GamePanel
 
     helpButton.setActionCommand("helpScreen");
     helpButton.addActionListener(listener);
+
+    muteButton = new JButton(new ImageIcon("img/muteButton.png"));
+    muteButton.setBounds(20, 20, 60, 60);
+
+    this.add(muteButton);
+
+    muteButton.setActionCommand("mute");
+    muteButton.addActionListener(listener);
 
     imgFileName = "img/StartScreen.png";
     this.loadImg();
