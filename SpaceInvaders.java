@@ -16,7 +16,7 @@ Space Invaders
 @author Kush Banker and Jack Basinet
 @version 11.14.19
 */
-public class SpaceInvaders extends JPanel implements ActionListener, MouseMotionListener, MouseListener
+public class SpaceInvaders extends JPanel implements ActionListener
 {
    // Constants
    public static final int WINDOW_WIDTH = 800;
@@ -27,6 +27,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
    // Instance variables
 
    private WindowManager windowManager;
+   private InputHandler inputHandler;
 
    private Player player;
 
@@ -53,9 +54,10 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       timer.start();
 
       this.player = new Player();
+      inputHandler = new InputHandler(player, timer);
 
       //Allows for Key Listening
-      window.addKeyListener(new InputHandler(player));
+      window.addKeyListener(inputHandler);
       window.setFocusable(true);
       window.requestFocusInWindow();
 
@@ -63,8 +65,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       windowManager = listener;
       this.initializeVariables();
 
-      this.addMouseMotionListener(this);
-      this.addMouseListener(this);
+      this.addMouseMotionListener(inputHandler);
+      this.addMouseListener(inputHandler);
    }
 
    // Initializes variables
@@ -236,31 +238,6 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       g.drawImage(background, 0, 0, null);
    }
 
-   public void mouseMoved(MouseEvent e)
-   {
-       if(player.getGun() == 4)
-       {
-         player.setY((int)((WINDOW_HEIGHT+e.getY())/(2.3)) - player.getHeight()/2);
-         player.setX(e.getX() - player.getWidth()/2);
-       }
-       else
-       {
-         player.setX(e.getX() - player.getWidth()/2);
-         player.setY(490);
-       }
-   }
-   public void mouseDragged(MouseEvent e){}
-
-   public void mouseReleased(MouseEvent e) {}
-   public void mouseExited(MouseEvent e) {}
-   public void mouseEntered(MouseEvent e) {}
-   public void mouseClicked(MouseEvent e) {}
-   public void mousePressed(MouseEvent e)
-   {
-     if(timer.isRunning()) {timer.stop(); }
-     else { timer.start(); }
-   }
-
 
    // Sets the dimensions of the window
    @Override
@@ -291,6 +268,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       this.repaint();
       if(gameRunning){
         timeElapsed += TICK_MS;
+        inputHandler.updatePlayer();
       }
       else
       {
