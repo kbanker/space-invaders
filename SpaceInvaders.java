@@ -52,8 +52,10 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       timer = new Timer(TICK_MS, this);
       timer.start();
 
+      this.player = new Player();
+
       //Allows for Key Listening
-      window.addKeyListener(new InputHandler);
+      window.addKeyListener(new InputHandler(player));
       window.setFocusable(true);
       window.requestFocusInWindow();
 
@@ -71,7 +73,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, MouseMotion
       this.timeElapsed = 0;
       this.gameRunning = true;
 
-      this.player = new Player();
+      //this.player = new Player();
       this.spawner = new Spawner();
 
       //Load background image
