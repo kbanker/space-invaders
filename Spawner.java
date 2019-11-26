@@ -80,7 +80,7 @@ class Spawner
     if(timer == 120000) { this.harder(); }
     if(timer == 180000) { this.harder(); }
 
-    System.out.println(timer);
+    //System.out.println(timer);
   }
 
   public void harder()
