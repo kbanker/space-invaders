@@ -113,13 +113,13 @@ class Player
     playerScore += score;
 
     if(playerScore < 100) { playerLevel = 1; }
-    else if(playerScore < 300)
+    else if(playerScore < 250)
     {
       playerLevel = 2;
       playerWidth = 45;
       playerHeight = 70;
     }
-    else if(playerScore < 575)
+    else if(playerScore < 450)
     {
       playerLevel = 3;
       playerWidth = 45;

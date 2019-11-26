@@ -13,8 +13,7 @@ class Spawner
   public static final int ALIEN_SPAWN_RATE_MS = 2000;
   public static final int TWIN_SPAWN_RATE_MS = 3000;
   public static final int CANNON_SPAWN_RATE_MS = 7000;
-
-  public static final int MINI_SPAWN_RATE_MS = 7000;
+  public static final int MINI_SPAWN_RATE_MS = 9000;
 
   public static final int MINI_SPAWN_RATE_WAVE_MS = 300;
 
