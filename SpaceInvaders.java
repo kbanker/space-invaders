@@ -132,7 +132,11 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
        else if(en instanceof Twin) { player.score(2); }
        else if(en instanceof Cannon) { player.score(3); }
        else if(en instanceof Mini) { player.score(2); }
-       else if(en instanceof Hearty) { player.gainLives(1); }
+       else if(en instanceof Hearty)
+       {
+         player.gainLives(1);
+         SoundHandler.playSound("sound/life.wav");
+       }
 
        enemies.remove(en);
        SoundHandler.playSound("sound/endie.wav");
