@@ -173,7 +173,7 @@ abstract class Enemy
   }
   public int getEarthDamage()
   {
-    if(earthDamage == null)
+    if(earthDamage == 0)
     {
       return meleeDamage;
     }
@@ -376,13 +376,13 @@ class Spike extends Enemy
     earthDamage = 4;
     meleeDamage = 2;
     health = 7;
-    speed = 5;
+    speed = 4;
   }
 
   public void shoot(){}
 
   @Override
-  public void enemyMove()
+  public void enemyMove(int speed)
   {
     enemyY += speed;
   }
