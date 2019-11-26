@@ -121,7 +121,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
        if(en.getHealth() <= 0) { enemiesRemo.add(en); }
        if(en.getY() >= WINDOW_HEIGHT)
        {
-         player.hurt(en.getMeleeDamage());
+         player.hurt(en.getEarthDamage());
          enemiesRemo.add(en);
        }
        if(g2.hit(en.getBounds(), player.getBounds(), false))

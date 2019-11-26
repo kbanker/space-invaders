@@ -17,6 +17,7 @@ class Spawner
   private int cannon_spawn_rate_ms;
   private int mini_spawn_rate_ms;
   private int hearty_spawn_rate_ms;
+  private int spike_spawn_rate_ms;
 
   private int minisPerWave;
 
@@ -25,6 +26,7 @@ class Spawner
   private int cannonTimer;
   private int miniTimer;
   private int heartyTimer;
+  private int spikeTimer;
 
   private boolean miniWave;
   private int miniWaveCt;
@@ -41,6 +43,7 @@ class Spawner
     cannon_spawn_rate_ms = 7000;
     mini_spawn_rate_ms = 9500;
     hearty_spawn_rate_ms = 10000;
+    spike_spawn_rate_ms = 10000;
 
     timer = 0;
 
@@ -49,6 +52,7 @@ class Spawner
     cannonTimer = 0;
     miniTimer = 0;
     heartyTimer = 0;
+    spikeTimer = 0;
 
     enemiesToSpawn = new ArrayList<Enemy>();
   }
@@ -143,6 +147,12 @@ class Spawner
     {
       enemiesToSpawn.add(new Hearty((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
       heartyTimer = 0;
+    }
+    //Spike
+    if(spikeTimer >= spike_spawn_rate_ms)
+    {
+      enemiesToSpawn.add(new Spike((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
+      spikeTimer = 0;
     }
 
     return enemiesToSpawn;
