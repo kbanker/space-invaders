@@ -55,7 +55,7 @@ class Player
     playerWidth = 55;
     playerHeight = 60;
 
-    playerSpeed = 20;
+    playerSpeed = 40;
 
     livesLeft = 10;
 
@@ -222,8 +222,8 @@ class Player
 
   public void move(boolean right)
   {
-    if(right) { playerX += playerSpeed; }
-    else { playerX -= playerSpeed; }
+    if(right && centerX < GamePanel.WINDOW_WIDTH) { playerX += playerSpeed; }
+    else if(!right && centerX > 0 ){ playerX -= playerSpeed; }
   }
 
   // Manage player bullets
