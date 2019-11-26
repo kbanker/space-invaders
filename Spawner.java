@@ -39,8 +39,8 @@ class Spawner
     alien_spawn_rate_ms = 2000;
     twin_spawn_rate_ms = 3000;
     cannon_spawn_rate_ms = 7000;
-    mini_spawn_rate_ms = 10000;
-    hearty_spawn_rate_ms = 8000;
+    mini_spawn_rate_ms = 9500;
+    hearty_spawn_rate_ms = 10000;
 
     timer = 0;
 

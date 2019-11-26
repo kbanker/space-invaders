@@ -139,7 +139,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
        else if(en instanceof Hearty)
        {
          player.gainLives(1);
-         SoundHandler.playSound("sound/life.wav");
+         SoundHandler.playSound("sound/life1.wav");
        }
 
        enemies.remove(en);

@@ -88,7 +88,7 @@ class Player
       weaponDamage = 2;
       bulletSize = 10;
       bulletSpeed = 20;
-      bulletDelay = 200;
+      bulletDelay = 240;
     }
     else if(gun == 2)
     {
@@ -102,7 +102,7 @@ class Player
       weaponDamage = 1;
       bulletSize = 6;
       bulletSpeed = 20;
-      bulletDelay = 80;
+      bulletDelay = 110;
     }
 
     this.loadImage();
