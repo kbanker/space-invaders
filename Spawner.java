@@ -80,20 +80,21 @@ class Spawner
       twin_spawn_rate_ms = 3200;
     }
     if(timer >= 110000) { spikeTimer += ms; }
-    //if(timer >= 180000) { tankTimer += ms; }
-    if(timer == 120000) { this.harder(); }
+    //if(timer >= 150000) { tankTimer += ms; }
+    if(timer == 140000) { this.harder(); }
     if(timer == 180000) { this.harder(); }
+    if(timer == 240000) { this.herder(); }
 
     //System.out.println(timer);
   }
 
   public void harder()
   {
-    alien_spawn_rate_ms -= 100;
-    twin_spawn_rate_ms -= 100;
-    cannon_spawn_rate_ms -= 100;
-    mini_spawn_rate_ms -= 100;
-    hearty_spawn_rate_ms -= 100;
+    alien_spawn_rate_ms -= 200;
+    twin_spawn_rate_ms -= 200;
+    cannon_spawn_rate_ms -= 200;
+    mini_spawn_rate_ms -= 200;
+    hearty_spawn_rate_ms -= 200;
   }
 
   public ArrayList<Enemy> spawn()
