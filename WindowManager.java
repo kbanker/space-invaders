@@ -107,7 +107,14 @@ public class WindowManager implements ActionListener
       this.updatePanel(new MenuPanel(this));
       this.resetWindowCursor();
     }
-    else if(command.equals("mute")) { SoundHandler.mute(); }
+    else if(command.equals("mute"))
+    {
+      SoundHandler.mute();
+      if(currentPanel instanceof MenuPanel)
+      {
+        ((MenuPanel) currentPanel).toggleMuteImage();
+      }
+    }
   }
 
   /**

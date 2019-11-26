@@ -308,7 +308,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       }
       else
       {
-        SoundHandler.playSound("sound/end.wav");
+        SoundHandler.playSound("sound/death.wav");
 
         timer.stop();
         windowManager.updatePanel(new EndPanel(windowManager, player.getScore(), (int) (timeElapsed / 1000)));

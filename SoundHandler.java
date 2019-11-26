@@ -11,7 +11,7 @@ the sound handler
 class SoundHandler
 {
   private static Clip clip;
-  private static boolean mute;
+  public static boolean mute;
 
   public static void playSong(String song)
   {

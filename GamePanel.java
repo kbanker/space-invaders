@@ -112,7 +112,7 @@ class MenuPanel extends GamePanel
     helpButton.setActionCommand("helpScreen");
     helpButton.addActionListener(listener);
 
-    muteButton = new JButton(new ImageIcon("img/muteButton.png"));
+    muteButton = new JButton(new ImageIcon("img/sound.png"));
     muteButton.setBounds(20, 20, 60, 60);
 
     this.add(muteButton);
@@ -122,6 +122,12 @@ class MenuPanel extends GamePanel
 
     imgFileName = "img/StartScreen.png";
     this.loadImg();
+  }
+
+  public void toggleMuteImage()
+  {
+    if(SoundHandler.mute) { muteButton.setIcon(new ImageIcon("img/mute.png")); }
+    else { muteButton.setIcon(new ImageIcon("img/sound.png")); }
   }
 }
 
