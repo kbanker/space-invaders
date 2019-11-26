@@ -288,7 +288,7 @@ class Cannon extends Enemy
 }
 
 /**
-Mini: basic enemy type
+Mini: small fast and in waves
 */
 class Mini extends Enemy
 {
@@ -309,4 +309,38 @@ class Mini extends Enemy
 
   public void shoot(){}
 
+}
+
+/**
+Hearty: basic enemy type that when killed gives life
+  only does damage through bullets
+*/
+class Hearty extends Enemy
+{
+  public static final int HEARTY_WIDTH = 32;
+  public static final int HEARTY_HEIGHT = 32;
+
+  public static final String IMG_FILE_NAME = "img/Hearty.png";
+
+  // Constructor
+  public Hearty(int x, int y)
+  {
+    super(x, y, HEARTY_WIDTH, HEARTY_HEIGHT, IMG_FILE_NAME);
+
+    meleeDamage = 0;
+    health = 3;
+    speed = 6;
+
+    shotFrequency = 1500 + (int) (Math.random() * 2000);
+  }
+
+  public void shoot()
+  {
+    EnemyBullet enBullet = new EnemyBullet(this.getX() + this.getWidth()/2, this.getY() + this.getHeight());
+    bullets.add(enBullet);
+
+    SoundHandler.playSound("sound/alshoot.wav");
+
+    this.resetTimer();
+  }
 }

@@ -112,14 +112,14 @@ class Player
   {
     playerScore += score;
 
-    if(playerScore < 100) { playerLevel = 1; }
-    else if(playerScore < 250)
+    if(playerScore < 80) { playerLevel = 1; }
+    else if(playerScore < 200)
     {
       playerLevel = 2;
       playerWidth = 45;
       playerHeight = 70;
     }
-    else if(playerScore < 450)
+    else if(playerScore < 400)
     {
       playerLevel = 3;
       playerWidth = 45;
@@ -292,6 +292,14 @@ class Player
     imgFileLife = "img/" + livesLeft + ".png";
 
     SoundHandler.playSound("sound/hit.wav");
+    this.updateLives();
+  }
+  public void gainLives(int amount)
+  {
+    livesLeft += amount;
+    imgFileLife = "img/" + livesLeft + ".png";
+
+    SoundHandler.playSound("");
     this.updateLives();
   }
   public int getLives()

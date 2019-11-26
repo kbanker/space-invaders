@@ -10,10 +10,11 @@ class Spawner
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
 
-  public static final int ALIEN_SPAWN_RATE_MS = 2000;
-  public static final int TWIN_SPAWN_RATE_MS = 3000;
-  public static final int CANNON_SPAWN_RATE_MS = 7000;
-  public static final int MINI_SPAWN_RATE_MS = 9000;
+  public static int alien_spawn_rate_ms;
+  public static int twin_spawn_rate_ms;
+  public static int cannon_spawn_rate_ms;
+  public static int mini_spawn_rate_ms;
+  public static int hearty_spawn_rate_ms;
 
   public static final int MINI_SPAWN_RATE_WAVE_MS = 300;
 
@@ -23,6 +24,7 @@ class Spawner
   private int twinTimer;
   private int cannonTimer;
   private int miniTimer;
+  private int heartyTimer;
 
   private boolean miniWave;
   private int miniWaveCt;
@@ -34,12 +36,19 @@ class Spawner
 
   public Spawner()
   {
+    alien_spawn_rate_ms = 2000;
+    twin_spawn_rate_ms = 3000;
+    cannon_spawn_rate_ms = 7000;
+    mini_spawn_rate_ms = 10000;
+    hearty_spawn_rate_ms = 8000;
+
     timer = 0;
 
     alienTimer = 0;
     twinTimer = 0;
     cannonTimer = 0;
     miniTimer = 0;
+    heartyTimer = 0;
 
     enemiesToSpawn = new ArrayList<Enemy>();
   }
@@ -50,8 +59,18 @@ class Spawner
 
     alienTimer += ms;
     if(timer >= 25000) { twinTimer += ms; }
-    if(timer >= 55000) {   cannonTimer += ms; }
-    if(timer >= 90000) { miniTimer += ms; }
+    if(timer >= 55000) { cannonTimer += ms; }
+    if(timer >= 90000)
+    {
+      miniTimer += ms;
+      alien_spawn_rate_ms = 3200;
+      twin_spawn_rate_ms = 3200;
+    }
+    if(timer >= 60000)
+    {
+      int ifHeart = (int)(Math.random()*3);
+      if(ifHeart == 2) { heartyTimer += ms; }
+    }
     //if(timer >= 130000) { spikeTimer += ms; }
     //if(timer >= 180000) { tankTimer += ms; }
   }
@@ -60,19 +79,19 @@ class Spawner
   {
     enemiesToSpawn = new ArrayList<Enemy>();
     //Alien
-    if(alienTimer >= ALIEN_SPAWN_RATE_MS)
+    if(alienTimer >= alien_spawn_rate_ms)
     {
       enemiesToSpawn.add(new Alien((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
       alienTimer = 0;
     }
     // Twin
-    if(twinTimer >= TWIN_SPAWN_RATE_MS)
+    if(twinTimer >= twin_spawn_rate_ms)
     {
       enemiesToSpawn.add(new Twin((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
       twinTimer = 0;
     }
     // Cannon
-    if(cannonTimer >= CANNON_SPAWN_RATE_MS)
+    if(cannonTimer >= cannon_spawn_rate_ms)
     {
       enemiesToSpawn.add(new Cannon((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
       cannonTimer = 0;
@@ -91,16 +110,21 @@ class Spawner
         miniWave = true;
         miniWaveCt++;
       }
-
     }
-    else if(miniTimer >= MINI_SPAWN_RATE_MS)
+    else if(miniTimer >= mini_spawn_rate_ms)
     {
       miniTimer = 0;
       miniWave = true;
       miniWaveCt = 0;
-      minisPerWave = (int) (Math.random() * 5 + 2);
+      minisPerWave = (int) (Math.random() * 4 + 2);
 
       miniWaveX = (int) (Math.random()*(WINDOW_WIDTH-120) + 60);
+    }
+    //HEARTY
+    if(heartyTimer >= hearty_spawn_rate_ms)
+    {
+      enemiesToSpawn.add(new Hearty((int) (Math.random()*(WINDOW_WIDTH-120) + 60), 0));
+      heartyTimer = 0;
     }
 
     return enemiesToSpawn;
