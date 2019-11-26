@@ -134,6 +134,7 @@ abstract class Enemy
     enemyY = y;
   }
 
+  // Enemy movement
   public void enemyMove(int speed)
   {
     if(moveCount >= 100) { moveCount = 0; }
