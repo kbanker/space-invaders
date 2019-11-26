@@ -75,11 +75,11 @@ class Spawner
       alien_spawn_rate_ms = 2800;
       twin_spawn_rate_ms = 3200;
     }
-    //if(timer >= 110000) { spikeTimer += ms; }
+    if(timer >= 130000) { spikeTimer += ms; }
     //if(timer >= 150000) { tankTimer += ms; }
-    if(timer == 140000) { this.harder(); }
     if(timer == 180000) { this.harder(); }
-    if(timer == 240000) { this.herder(); }
+    if(timer == 220000) { this.harder(); }
+    if(timer == 240000) { this.harder(); }
 
     //System.out.println(timer);
   }
