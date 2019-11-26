@@ -11,31 +11,32 @@ Parent class for all enemy entities
 */
 abstract class Enemy
 {
-  public int enemyX;
-  public int enemyY;
-  public int enemyWidth;
-  public int enemyHeight;
+  protected int enemyX;
+  protected int enemyY;
+  protected int enemyWidth;
+  protected int enemyHeight;
 
-  public int health;
+  protected int health;
 
-  public int meleeDamage;
+  protected int meleeDamage;
+  protected int earthDamage;
 
-  public int shotTimer;
-  public int shotFrequency;
+  protected int shotTimer;
+  protected int shotFrequency;
 
-  public Rectangle bounds = null;
+  protected Rectangle bounds = null;
 
-  public String imgFileName;
-  public BufferedImage image;
+  protected String imgFileName;
+  protected BufferedImage image;
 
   // Variables of movement counters
-  public int moveCount;
-  public int numEns;
+  protected int moveCount;
+  protected int numEns;
 
-  public int speed;
+  protected int speed;
 
   // Array of bullets
-  public ArrayList<EnemyBullet> bullets = new ArrayList<EnemyBullet>();
+  protected ArrayList<EnemyBullet> bullets = new ArrayList<EnemyBullet>();
 
   // Constructor
   public Enemy(int x, int y, int width, int height, String imageFile)
@@ -170,6 +171,18 @@ abstract class Enemy
   public int getMeleeDamage()
   {
     return meleeDamage;
+  }
+  public int getEarthDamage()
+  {
+    if(earthDamage == 0)
+    {
+      return meleeDamage;
+    }
+    else
+    {
+      return earthDamage;
+    }
+
   }
 
   // Enemy health and hurt
@@ -343,5 +356,35 @@ class Hearty extends Enemy
     SoundHandler.playSound("sound/alshoot.wav");
 
     this.resetTimer();
+  }
+}
+
+/**
+Spike: goes straight down and does more damage if it hits earth
+*/
+class Spike extends Enemy
+{
+  public static final int WIDTH = 32;
+  public static final int HEIGHT = 32;
+
+  public static final String IMG_FILE_NAME = "img/Spike.png";
+
+  // Constructor
+  public Spike(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
+
+    earthDamage = 4;
+    meleeDamage = 2;
+    health = 7;
+    speed = 4;
+  }
+
+  public void shoot(){}
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    enemyY += speed;
   }
 }
