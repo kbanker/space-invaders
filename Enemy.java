@@ -388,3 +388,72 @@ class Spike extends Enemy
     enemyY += speed;
   }
 }
+
+/**
+Tank: beefee unit and spwns two tankis when dies
+*/
+class Tank extends Enemy
+{
+  public static final int WIDTH = 40;
+  public static final int HEIGHT = 40;
+
+  public static final String IMG_FILE_NAME = "img/Tank.png";
+
+  // Constructor
+  public Tank(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
+
+    earthDamage = 4;
+    meleeDamage = 2;
+    health = 11;
+    speed = 2;
+  }
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    enemyY += speed;
+  }
+}
+
+/**
+Tanki2: first slow mini spawned by tank
+*/
+class Tanki1 extends Enemy
+{
+  public static final int WIDTH = 24;
+  public static final int HEIGHT = 24;
+
+  public static final String IMG_FILE_NAME = "img/Tanki1.png";
+
+  // Constructor
+  public Tanki1(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME1);
+
+    meleeDamage = 1;
+    health = 1;
+    speed = 5;
+  }
+}
+
+/**
+Tanki2: second slow mini spawned by tank
+*/
+class Tanki2 extends Enemy
+{
+  public static final int WIDTH = 24;
+  public static final int HEIGHT = 24;
+
+  public static final String IMG_FILE_NAME = "img/Tanki2.png";
+
+  public Tanki2(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME2);
+
+    meleeDamage = 1;
+    health = 1;
+    speed = 5;
+  }
+}
