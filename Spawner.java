@@ -83,7 +83,7 @@ class Spawner
     //if(timer >= 150000) { tankTimer += ms; }
     if(timer == 140000) { this.harder(); }
     if(timer == 180000) { this.harder(); }
-    if(timer == 240000) { this.herder(); }
+    if(timer == 240000) { this.harder(); }
 
     //System.out.println(timer);
   }
