@@ -117,7 +117,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
        if(en.getHealth() <= 0) { enemiesRemo.add(en); }
        if(en.getY() >= WINDOW_HEIGHT)
        {
-         player.hurt(1);
+         player.hurt(en.getMeleeDamage());
          enemiesRemo.add(en);
        }
        if(g2.hit(en.getBounds(), player.getBounds(), false))
@@ -132,6 +132,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
        else if(en instanceof Twin) { player.score(2); }
        else if(en instanceof Cannon) { player.score(3); }
        else if(en instanceof Mini) { player.score(2); }
+       else if(en instanceof Hearty) { player.gainLives(1); }
 
        enemies.remove(en);
        SoundHandler.playSound("sound/endie.wav");
