@@ -9,14 +9,14 @@ class Spawner
 {
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
-
-  public static int alien_spawn_rate_ms;
-  public static int twin_spawn_rate_ms;
-  public static int cannon_spawn_rate_ms;
-  public static int mini_spawn_rate_ms;
-  public static int hearty_spawn_rate_ms;
-
+  
   public static final int MINI_SPAWN_RATE_WAVE_MS = 300;
+
+  private int alien_spawn_rate_ms;
+  private int twin_spawn_rate_ms;
+  private int cannon_spawn_rate_ms;
+  private int mini_spawn_rate_ms;
+  private int hearty_spawn_rate_ms;
 
   private int minisPerWave;
 
@@ -52,7 +52,10 @@ class Spawner
 
     enemiesToSpawn = new ArrayList<Enemy>();
   }
-
+  /**
+  THE MOST IMPORTANT METHOD OF THEM ALL
+  @param ms Milliseconds
+  */
   public void tick(int ms)
   {
     timer += ms;
@@ -63,8 +66,8 @@ class Spawner
     if(timer >= 90000)
     {
       miniTimer += ms;
-      alien_spawn_rate_ms = 3200;
-      twin_spawn_rate_ms = 3200;
+      alien_spawn_rate_ms += 800;
+      twin_spawn_rate_ms += 200;
     }
     if(timer >= 60000)
     {
@@ -73,6 +76,17 @@ class Spawner
     }
     //if(timer >= 130000) { spikeTimer += ms; }
     //if(timer >= 180000) { tankTimer += ms; }
+    if(timer == 120000) { this.harder(); }
+    if(timer == 180000) { this.harder(); }
+  }
+
+  public void harder()
+  {
+    alien_spawn_rate_ms -= 100;
+    twin_spawn_rate_ms -= 100;
+    cannon_spawn_rate_ms -= 100;
+    mini_spawn_rate_ms -= 100;
+    hearty_spawn_rate_ms -= 100;
   }
 
   public ArrayList<Enemy> spawn()
