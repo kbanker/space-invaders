@@ -16,7 +16,7 @@ Space Invaders
 @author Kush Banker and Jack Basinet
 @version 11.14.19
 */
-public class SpaceInvaders extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener
+public class SpaceInvaders extends JPanel implements ActionListener, MouseMotionListener, MouseListener
 {
    // Constants
    public static final int WINDOW_WIDTH = 800;
@@ -53,7 +53,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       timer.start();
 
       //Allows for Key Listening
-      window.addKeyListener(this);
+      window.addKeyListener(new InputHandler);
       window.setFocusable(true);
       window.requestFocusInWindow();
 
@@ -233,19 +233,6 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
    {
       g.drawImage(background, 0, 0, null);
    }
-
-   // Manage player movement and action
-   public void keyPressed(KeyEvent e)
-   {
-      int keyCode = e.getKeyCode();
-
-      if(keyCode == KeyEvent.VK_SPACE) { player.shoot(); }
-      else if(keyCode == KeyEvent.VK_C) { player.changeWeapon(); }
-      else if(keyCode == KeyEvent.VK_LEFT) { player.move(false); }
-      else if(keyCode == KeyEvent.VK_RIGHT) { player.move(true); }
-   }
-   public void keyReleased(KeyEvent e){}
-   public void keyTyped(KeyEvent e){}
 
    public void mouseMoved(MouseEvent e)
    {
