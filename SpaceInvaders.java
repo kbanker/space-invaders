@@ -143,7 +143,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
            player.gainLives(1);
            SoundHandler.playSound("sound/life1.wav");
          }
-         else { player.score(1) }
+         else { player.score(1); }
        }
 
        enemies.remove(en);
