@@ -154,7 +154,6 @@ abstract class Enemy
        this.setX(this.getX() + speed);
        moveCount++;
     }
-    numEns--;
   }
 
   // Manage enemy bullets
@@ -404,11 +403,13 @@ class Tank extends Enemy
   {
     super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
 
-    earthDamage = 4;
-    meleeDamage = 2;
+    earthDamage = 0;
+    meleeDamage = 1;
     health = 11;
     speed = 2;
   }
+
+  public void shoot(){}
 
   @Override
   public void enemyMove(int speed)
@@ -420,40 +421,61 @@ class Tank extends Enemy
 /**
 Tanki2: first slow mini spawned by tank
 */
-class Tanki1 extends Enemy
+class Tanki extends Enemy
 {
   public static final int WIDTH = 24;
   public static final int HEIGHT = 24;
 
-  public static final String IMG_FILE_NAME = "img/Tanki1.png";
+  private int imgFileC;
 
   // Constructor
-  public Tanki1(int x, int y)
+  public Tanki(int x, int y, int imgFileNum)
   {
-    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME1);
+    super(x, y, WIDTH, HEIGHT, "img/tanki" + imgFileNum + ".png");
+    imgFileC = imgFileNum;
 
     meleeDamage = 1;
     health = 1;
-    speed = 5;
+    speed = 4;
   }
-}
 
-/**
-Tanki2: second slow mini spawned by tank
-*/
-class Tanki2 extends Enemy
-{
-  public static final int WIDTH = 24;
-  public static final int HEIGHT = 24;
-
-  public static final String IMG_FILE_NAME = "img/Tanki2.png";
-
-  public Tanki2(int x, int y)
+  @Override
+  public void enemyMove(int speed)
   {
-    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME2);
+    int mod;
+    if(imgFileC == 1) { mod = 1; }
+    else { mod = -1; }
+    if(moveCount >= 44) { moveCount = 0; }
 
-    meleeDamage = 1;
-    health = 1;
-    speed = 5;
+    if(moveCount < 17)
+    {
+       this.setX(this.getX() - (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 17 && moveCount < 22 )
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
+    else if(moveCount >= 22 && moveCount < 39)
+    {
+       this.setX(this.getX() + (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 39)
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
+  }
+
+  public void shoot()
+  {
+    EnemyBullet enBullet = new EnemyBullet(this.getX() + this.getWidth()/2, this.getY() + this.getHeight());
+    bullets.add(enBullet);
+
+    SoundHandler.playSound("sound/alshoot.wav");
+
+    this.resetTimer();
   }
 }
