@@ -16,7 +16,7 @@ Space Invaders
 @author Kush Banker and Jack Basinet
 @version 11.14.19
 */
-public class SpaceInvaders extends JPanel implements ActionListener, KeyListener, MouseMotionListener, MouseListener
+public class SpaceInvaders extends JPanel implements ActionListener
 {
    // Constants
    public static final int WINDOW_WIDTH = 800;
@@ -27,6 +27,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
    // Instance variables
 
    private WindowManager windowManager;
+   private InputHandler inputHandler;
 
    private Player player;
 
@@ -52,8 +53,11 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       timer = new Timer(TICK_MS, this);
       timer.start();
 
+      this.player = new Player();
+      inputHandler = new InputHandler(player, timer);
+
       //Allows for Key Listening
-      window.addKeyListener(this);
+      window.addKeyListener(inputHandler);
       window.setFocusable(true);
       window.requestFocusInWindow();
 
@@ -61,8 +65,8 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       windowManager = listener;
       this.initializeVariables();
 
-      this.addMouseMotionListener(this);
-      this.addMouseListener(this);
+      this.addMouseMotionListener(inputHandler);
+      this.addMouseListener(inputHandler);
    }
 
    // Initializes variables
@@ -71,7 +75,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       this.timeElapsed = 0;
       this.gameRunning = true;
 
-      this.player = new Player();
+      //this.player = new Player();
       this.spawner = new Spawner();
 
       //Load background image
@@ -237,44 +241,6 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       g.drawImage(background, 0, 0, null);
    }
 
-   // Manage player movement and action
-   public void keyPressed(KeyEvent e)
-   {
-      int keyCode = e.getKeyCode();
-
-      if(keyCode == KeyEvent.VK_SPACE) { player.shoot(); }
-      else if(keyCode == KeyEvent.VK_C) { player.changeWeapon(); }
-      else if(keyCode == KeyEvent.VK_LEFT) { player.move(false); }
-      else if(keyCode == KeyEvent.VK_RIGHT) { player.move(true); }
-   }
-   public void keyReleased(KeyEvent e){}
-   public void keyTyped(KeyEvent e){}
-
-   public void mouseMoved(MouseEvent e)
-   {
-       if(player.getGun() == 4)
-       {
-         player.setY((int)((WINDOW_HEIGHT+e.getY())/(2.3)) - player.getHeight()/2);
-         player.setX(e.getX() - player.getWidth()/2);
-       }
-       else
-       {
-         player.setX(e.getX() - player.getWidth()/2);
-         player.setY(490);
-       }
-   }
-   public void mouseDragged(MouseEvent e){}
-
-   public void mouseReleased(MouseEvent e) {}
-   public void mouseExited(MouseEvent e) {}
-   public void mouseEntered(MouseEvent e) {}
-   public void mouseClicked(MouseEvent e) {}
-   public void mousePressed(MouseEvent e)
-   {
-     if(timer.isRunning()) {timer.stop(); }
-     else { timer.start(); }
-   }
-
 
    // Sets the dimensions of the window
    @Override
@@ -305,6 +271,7 @@ public class SpaceInvaders extends JPanel implements ActionListener, KeyListener
       this.repaint();
       if(gameRunning){
         timeElapsed += TICK_MS;
+        inputHandler.updatePlayer();
       }
       else
       {
