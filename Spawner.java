@@ -9,7 +9,7 @@ class Spawner
 {
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
-  
+
   public static final int MINI_SPAWN_RATE_WAVE_MS = 300;
 
   private int alien_spawn_rate_ms;
@@ -52,6 +52,7 @@ class Spawner
 
     enemiesToSpawn = new ArrayList<Enemy>();
   }
+
   /**
   THE MOST IMPORTANT METHOD OF THEM ALL
   @param ms Milliseconds
@@ -63,21 +64,23 @@ class Spawner
     alienTimer += ms;
     if(timer >= 25000) { twinTimer += ms; }
     if(timer >= 55000) { cannonTimer += ms; }
-    if(timer >= 90000)
-    {
-      miniTimer += ms;
-      alien_spawn_rate_ms += 800;
-      twin_spawn_rate_ms += 200;
-    }
     if(timer >= 60000)
     {
       int ifHeart = (int)(Math.random()*3);
       if(ifHeart == 2) { heartyTimer += ms; }
     }
+    if(timer >= 90000)
+    {
+      miniTimer += ms;
+      alien_spawn_rate_ms = 2800;
+      twin_spawn_rate_ms = 3200;
+    }
     //if(timer >= 130000) { spikeTimer += ms; }
     //if(timer >= 180000) { tankTimer += ms; }
     if(timer == 120000) { this.harder(); }
     if(timer == 180000) { this.harder(); }
+
+    System.out.println(timer);
   }
 
   public void harder()
