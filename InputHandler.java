@@ -24,6 +24,7 @@ class InputHandler implements KeyListener, MouseMotionListener, MouseListener
     super();
     this.player = player;
     this.keyPressed = new HashMap<String, Boolean>();
+    this.timer = timer;
 
     keyPressed.put("space", false);
     keyPressed.put("c", false);
