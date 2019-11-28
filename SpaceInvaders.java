@@ -122,11 +122,16 @@ public class SpaceInvaders extends JPanel implements ActionListener
        if(en.getY() >= WINDOW_HEIGHT)
        {
          player.hurt(en.getEarthDamage());
+         this.hurtFlash(g);
          enemiesRemo.add(en);
        }
        if(g2.hit(en.getBounds(), player.getBounds(), false))
        {
-         if(player.getGun() != 4) { player.hurt(en.getMeleeDamage()); }
+         if(player.getGun() != 4)
+         {
+           player.hurt(en.getMeleeDamage());
+           this.hurtFlash(g);
+         }
          enemiesRemo.add(en);
        }
      }
@@ -228,6 +233,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
                 bulletsRemo.add(b);
 
                 player.hurt(b.getDamage());
+                this.hurtFlash(g);
              }
              b.updateBullet();
           }
@@ -255,6 +261,12 @@ public class SpaceInvaders extends JPanel implements ActionListener
    public void setBackground(Graphics g)
    {
       g.drawImage(background, 0, 0, null);
+   }
+
+   public void hurtFlash(Graphics g)
+   {
+     g.setColor(new Color(255, 0, 0, 90));
+     g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
    }
 
 
