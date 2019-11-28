@@ -121,7 +121,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
        if(en.getHealth() <= 0) { enemiesRemo.add(en); }
        if(en.getY() >= WINDOW_HEIGHT)
        {
-         player.hurt(en.getMeleeDamage());
+         player.hurt(en.getEarthDamage());
          enemiesRemo.add(en);
        }
        if(g2.hit(en.getBounds(), player.getBounds(), false))
@@ -145,6 +145,13 @@ public class SpaceInvaders extends JPanel implements ActionListener
          }
          else { player.score(1); }
        }
+       else if(en instanceof Tank)
+       {
+         player.score(3);
+         enemies.add(new Tanki(en.getX() - 5 , en.getY(), 1));
+         enemies.add(new Tanki(en.getX()+ Tank.WIDTH + 5, en.getY(), 2));
+       }
+       else if(en instanceof Tanki) { player.score(1); }
 
        enemies.remove(en);
        SoundHandler.playSound("sound/endie.wav");

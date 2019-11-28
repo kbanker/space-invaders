@@ -7,15 +7,15 @@ Class to track bullets
 */
 class Bullet
 {
-  public int bulletX;
-  public int bulletY;
+  protected int bulletX;
+  protected int bulletY;
 
-  public int bulletDiam;
-  public int bulletSpeed;
+  protected int bulletDiam;
+  protected int bulletSpeed;
 
-  public int bulletDamage;
+  protected int bulletDamage;
 
-  public long timeShot;
+  protected long timeShot;
 
   // Constructor
   public Bullet(int x, int y, int d, int s, int damage)

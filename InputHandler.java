@@ -24,9 +24,9 @@ class InputHandler implements KeyListener, MouseMotionListener, MouseListener
     super();
     this.player = player;
     this.keyPressed = new HashMap<String, Boolean>();
+    this.timer = timer;
 
     keyPressed.put("space", false);
-    keyPressed.put("c", false);
     keyPressed.put("left", false);
     keyPressed.put("right", false);
   }
@@ -34,7 +34,6 @@ class InputHandler implements KeyListener, MouseMotionListener, MouseListener
   public void updatePlayer()
   {
     if (keyPressed.get("space")) { player.shoot(); }
-    if (keyPressed.get("c")) { player.changeWeapon(); }
     if (keyPressed.get("left")) { player.move(false); }
     if (keyPressed.get("right")) { player.move(true); }
   }
@@ -50,11 +49,10 @@ class InputHandler implements KeyListener, MouseMotionListener, MouseListener
      }
      else if(keyCode == KeyEvent.VK_C)
      {
-       keyPressed.put("c", true);
+       player.changeWeapon();
      }
      else if(keyCode == KeyEvent.VK_LEFT)
      {
-
        keyPressed.put("left", true);
      }
      else if(keyCode == KeyEvent.VK_RIGHT)
@@ -69,10 +67,6 @@ class InputHandler implements KeyListener, MouseMotionListener, MouseListener
     if(keyCode == KeyEvent.VK_SPACE)
     {
       keyPressed.put("space", false);
-    }
-    else if(keyCode == KeyEvent.VK_C)
-    {
-      keyPressed.put("c", false);
     }
     else if(keyCode == KeyEvent.VK_LEFT)
     {

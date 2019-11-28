@@ -11,31 +11,32 @@ Parent class for all enemy entities
 */
 abstract class Enemy
 {
-  public int enemyX;
-  public int enemyY;
-  public int enemyWidth;
-  public int enemyHeight;
+  protected int enemyX;
+  protected int enemyY;
+  protected int enemyWidth;
+  protected int enemyHeight;
 
-  public int health;
+  protected int health;
 
-  public int meleeDamage;
+  protected int meleeDamage;
+  protected int earthDamage;
 
-  public int shotTimer;
-  public int shotFrequency;
+  protected int shotTimer;
+  protected int shotFrequency;
 
-  public Rectangle bounds = null;
+  protected Rectangle bounds = null;
 
-  public String imgFileName;
-  public BufferedImage image;
+  protected String imgFileName;
+  protected BufferedImage image;
 
   // Variables of movement counters
-  public int moveCount;
-  public int numEns;
+  protected int moveCount;
+  protected int numEns;
 
-  public int speed;
+  protected int speed;
 
   // Array of bullets
-  public ArrayList<EnemyBullet> bullets = new ArrayList<EnemyBullet>();
+  protected ArrayList<EnemyBullet> bullets = new ArrayList<EnemyBullet>();
 
   // Constructor
   public Enemy(int x, int y, int width, int height, String imageFile)
@@ -153,7 +154,6 @@ abstract class Enemy
        this.setX(this.getX() + speed);
        moveCount++;
     }
-    numEns--;
   }
 
   // Manage enemy bullets
@@ -170,6 +170,18 @@ abstract class Enemy
   public int getMeleeDamage()
   {
     return meleeDamage;
+  }
+  public int getEarthDamage()
+  {
+    if(earthDamage == 0)
+    {
+      return meleeDamage;
+    }
+    else
+    {
+      return earthDamage;
+    }
+
   }
 
   // Enemy health and hurt
@@ -333,6 +345,128 @@ class Hearty extends Enemy
     speed = 6;
 
     shotFrequency = 1500 + (int) (Math.random() * 2000);
+  }
+
+  public void shoot()
+  {
+    EnemyBullet enBullet = new EnemyBullet(this.getX() + this.getWidth()/2, this.getY() + this.getHeight());
+    bullets.add(enBullet);
+
+    SoundHandler.playSound("sound/alshoot.wav");
+
+    this.resetTimer();
+  }
+}
+
+/**
+Spike: goes straight down and does more damage if it hits earth
+*/
+class Spike extends Enemy
+{
+  public static final int WIDTH = 32;
+  public static final int HEIGHT = 32;
+
+  public static final String IMG_FILE_NAME = "img/Spike.png";
+
+  // Constructor
+  public Spike(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
+
+    earthDamage = 4;
+    meleeDamage = 2;
+    health = 7;
+    speed = 4;
+  }
+
+  public void shoot(){}
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    enemyY += speed;
+  }
+}
+
+/**
+Tank: beefee unit and spwns two tankis when dies
+*/
+class Tank extends Enemy
+{
+  public static final int WIDTH = 40;
+  public static final int HEIGHT = 40;
+
+  public static final String IMG_FILE_NAME = "img/Tank.png";
+
+  // Constructor
+  public Tank(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
+
+    earthDamage = 0;
+    meleeDamage = 1;
+    health = 11;
+    speed = 2;
+  }
+
+  public void shoot(){}
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    enemyY += speed;
+  }
+}
+
+/**
+Tanki2: first slow mini spawned by tank
+*/
+class Tanki extends Enemy
+{
+  public static final int WIDTH = 24;
+  public static final int HEIGHT = 24;
+
+  private int imgFileC;
+
+  // Constructor
+  public Tanki(int x, int y, int imgFileNum)
+  {
+    super(x, y, WIDTH, HEIGHT, "img/tanki" + imgFileNum + ".png");
+    imgFileC = imgFileNum;
+
+    meleeDamage = 1;
+    health = 1;
+    speed = 4;
+  }
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    int mod;
+    if(imgFileC == 1) { mod = 1; }
+    else { mod = -1; }
+    if(moveCount >= 44) { moveCount = 0; }
+
+    if(moveCount < 17)
+    {
+       this.setX(this.getX() - (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 17 && moveCount < 22 )
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
+    else if(moveCount >= 22 && moveCount < 39)
+    {
+       this.setX(this.getX() + (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 39)
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
   }
 
   public void shoot()
