@@ -147,6 +147,7 @@ public class SpaceInvaders extends JPanel implements ActionListener
          {
            player.gainLives(1);
            SoundHandler.playSound("sound/life1.wav");
+           this.gainFlash(g);
          }
          else { player.score(1); }
        }
@@ -266,6 +267,11 @@ public class SpaceInvaders extends JPanel implements ActionListener
    public void hurtFlash(Graphics g)
    {
      g.setColor(new Color(255, 0, 0, 90));
+     g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+   }
+   public void gainFlash(Graphics g)
+   {
+     g.setColor(new Color(0, 255, 0, 90));
      g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
    }
 
