@@ -112,7 +112,7 @@ class InfoPanel extends GamePanel
     scoreDisplayTextArea.setEditable(false);
 
     scoreDisplayPane = new JScrollPane(scoreDisplayTextArea);
-    scoreDisplayPane.setBounds(600, 320, 180, 200);
+    scoreDisplayPane.setBounds(500, 320, 180, 200);
     this.add(scoreDisplayPane);
 
     scoreDisplayTextArea.setBackground(Color.BLACK);
@@ -137,7 +137,15 @@ class InfoPanel extends GamePanel
 
     //Score and time
     g.setColor(Color.WHITE);
-    //g.drawString();
+
+    g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 9));
+    g.drawString("Space Invaders please don't sue us.", 0, 590);
+
+    g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+    g.drawString("Created by:", 400, 160);
+    g.drawString("Jack Basinet and Kush Banker", 400, 200);
+
+    g.drawString("HIGHSCORES:", 500, 300);
   }
 }
 
