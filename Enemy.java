@@ -375,7 +375,7 @@ class Spike extends Enemy
 
     earthDamage = 4;
     meleeDamage = 2;
-    health = 7;
+    health = 9;
     speed = 4;
   }
 
@@ -405,7 +405,7 @@ class Tank extends Enemy
 
     earthDamage = 0;
     meleeDamage = 1;
-    health = 11;
+    health = 13;
     speed = 2;
   }
 
