@@ -154,7 +154,6 @@ abstract class Enemy
        this.setX(this.getX() + speed);
        moveCount++;
     }
-    numEns--;
   }
 
   // Manage enemy bullets
@@ -386,5 +385,97 @@ class Spike extends Enemy
   public void enemyMove(int speed)
   {
     enemyY += speed;
+  }
+}
+
+/**
+Tank: beefee unit and spwns two tankis when dies
+*/
+class Tank extends Enemy
+{
+  public static final int WIDTH = 40;
+  public static final int HEIGHT = 40;
+
+  public static final String IMG_FILE_NAME = "img/Tank.png";
+
+  // Constructor
+  public Tank(int x, int y)
+  {
+    super(x, y, WIDTH, HEIGHT, IMG_FILE_NAME);
+
+    earthDamage = 0;
+    meleeDamage = 1;
+    health = 11;
+    speed = 2;
+  }
+
+  public void shoot(){}
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    enemyY += speed;
+  }
+}
+
+/**
+Tanki2: first slow mini spawned by tank
+*/
+class Tanki extends Enemy
+{
+  public static final int WIDTH = 24;
+  public static final int HEIGHT = 24;
+
+  private int imgFileC;
+
+  // Constructor
+  public Tanki(int x, int y, int imgFileNum)
+  {
+    super(x, y, WIDTH, HEIGHT, "img/tanki" + imgFileNum + ".png");
+    imgFileC = imgFileNum;
+
+    meleeDamage = 1;
+    health = 1;
+    speed = 4;
+  }
+
+  @Override
+  public void enemyMove(int speed)
+  {
+    int mod;
+    if(imgFileC == 1) { mod = 1; }
+    else { mod = -1; }
+    if(moveCount >= 44) { moveCount = 0; }
+
+    if(moveCount < 17)
+    {
+       this.setX(this.getX() - (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 17 && moveCount < 22 )
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
+    else if(moveCount >= 22 && moveCount < 39)
+    {
+       this.setX(this.getX() + (mod*speed));
+       moveCount++;
+    }
+    else if( moveCount >= 39)
+    {
+       this.setY(this.getY() + speed);
+       moveCount++;
+    }
+  }
+
+  public void shoot()
+  {
+    EnemyBullet enBullet = new EnemyBullet(this.getX() + this.getWidth()/2, this.getY() + this.getHeight());
+    bullets.add(enBullet);
+
+    SoundHandler.playSound("sound/alshoot.wav");
+
+    this.resetTimer();
   }
 }

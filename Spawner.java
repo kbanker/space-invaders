@@ -18,6 +18,7 @@ class Spawner
   private int mini_spawn_rate_ms;
   private int hearty_spawn_rate_ms;
   private int spike_spawn_rate_ms;
+  private int tank_spawn_rate_ms;
 
   private int minisPerWave;
 
@@ -44,6 +45,7 @@ class Spawner
     mini_spawn_rate_ms = 9500;
     hearty_spawn_rate_ms = 10000;
     spike_spawn_rate_ms = 10000;
+    tank_spawn_rate_ms = 11000
 
     timer = 0;
 
@@ -80,7 +82,7 @@ class Spawner
       twin_spawn_rate_ms = 3200;
     }
     if(timer >= 130000) { spikeTimer += ms; }
-    //if(timer >= 150000) { tankTimer += ms; }
+    if(timer >= 150000) { tankTimer += ms; }
     if(timer == 180000) { this.harder(); }
     if(timer == 220000) { this.harder(); }
     if(timer == 240000) { this.harder(); }
@@ -95,6 +97,8 @@ class Spawner
     cannon_spawn_rate_ms -= 200;
     mini_spawn_rate_ms -= 200;
     hearty_spawn_rate_ms -= 200;
+    spike_spawn_rate_ms -= 200;
+    tank_spawn_rate_ms
   }
 
   public ArrayList<Enemy> spawn()
