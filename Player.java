@@ -102,7 +102,7 @@ class Player
       weaponDamage = 1;
       bulletSize = 6;
       bulletSpeed = 20;
-      bulletDelay = 115;
+      bulletDelay = 145;
     }
 
     this.loadImage();
@@ -113,13 +113,13 @@ class Player
     playerScore += score;
 
     if(playerScore < 100) { playerLevel = 1; }
-    else if(playerScore < 250)
+    else if(playerScore < 300)
     {
       playerLevel = 2;
       playerWidth = 45;
       playerHeight = 70;
     }
-    else if(playerScore < 450)
+    else if(playerScore < 600)
     {
       playerLevel = 3;
       playerWidth = 45;

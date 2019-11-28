@@ -28,6 +28,7 @@ class Spawner
   private int miniTimer;
   private int heartyTimer;
   private int spikeTimer;
+  private int tankTimer;
 
   private boolean miniWave;
   private int miniWaveCt;
@@ -45,7 +46,7 @@ class Spawner
     mini_spawn_rate_ms = 9500;
     hearty_spawn_rate_ms = 10000;
     spike_spawn_rate_ms = 10000;
-    tank_spawn_rate_ms = 11000
+    tank_spawn_rate_ms = 11000;
 
     timer = 0;
 
@@ -98,7 +99,7 @@ class Spawner
     mini_spawn_rate_ms -= 200;
     hearty_spawn_rate_ms -= 200;
     spike_spawn_rate_ms -= 200;
-    tank_spawn_rate_ms
+    tank_spawn_rate_ms -= 200;
   }
 
   public ArrayList<Enemy> spawn()
