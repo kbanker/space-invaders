@@ -87,8 +87,10 @@ Displays the Info Screen
 */
 class InfoPanel extends GamePanel
 {
-
   private JButton menuButton;
+
+  private JTextArea scoreDisplayTextArea;
+  private JScrollPane scoreDisplayPane;
 
   public InfoPanel(WindowManager listener)
   {
@@ -104,6 +106,38 @@ class InfoPanel extends GamePanel
 
     imgFileName = "img/info.png";
     this.loadImg();
+
+    //High Score Display
+    scoreDisplayTextArea = new JTextArea();
+    scoreDisplayTextArea.setEditable(false);
+
+    scoreDisplayPane = new JScrollPane(scoreDisplayTextArea);
+    scoreDisplayPane.setBounds(600, 320, 180, 200);
+    this.add(scoreDisplayPane);
+
+    scoreDisplayTextArea.setBackground(Color.BLACK);
+    scoreDisplayTextArea.setForeground(Color.WHITE);
+    scoreDisplayTextArea.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+    HashMap<Integer, String> scoresAndNames = windowManager.getHighScores();
+    NavigableSet<Integer> scores = (new TreeSet<Integer>(scoresAndNames.keySet())).descendingSet();
+
+    scoreDisplayTextArea.setText("");
+
+    for(Integer score: scores)
+    {
+      scoreDisplayTextArea.append(scoresAndNames.get(score) + ": " + score + "\n");
+    }
+  }
+
+  @Override
+  protected void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);
+
+    //Score and time
+    g.setColor(Color.WHITE);
+    //g.drawString();
   }
 }
 
