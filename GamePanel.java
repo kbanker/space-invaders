@@ -61,7 +61,6 @@ Displays the Help Screen
 class HelpPanel extends GamePanel
 {
 
-  private JButton startButton;
   private JButton menuButton;
 
   public HelpPanel(WindowManager listener)
@@ -82,6 +81,33 @@ class HelpPanel extends GamePanel
 }
 
 /**
+Displays the Info Screen
+@author Kush Banker and Jack Basinet
+@version 11.19.19
+*/
+class InfoPanel extends GamePanel
+{
+
+  private JButton menuButton;
+
+  public InfoPanel(WindowManager listener)
+  {
+    super(listener);
+
+    menuButton = new JButton(new ImageIcon("img/menu.png"));
+    menuButton.setBounds(605, 20, 175, 65);
+
+    this.add(menuButton);
+
+    menuButton.setActionCommand("menuScreen");
+    menuButton.addActionListener(listener);
+
+    imgFileName = "img/info.png";
+    this.loadImg();
+  }
+}
+
+/**
 Displays the Menu
 @author Kush Banker and Jack Basinet
 @version 11.19.19
@@ -91,6 +117,7 @@ class MenuPanel extends GamePanel
   private JButton startButton;
   private JButton helpButton;
   private JButton muteButton;
+  private JButton infoButton;
 
   public MenuPanel(WindowManager listener)
   {
@@ -119,6 +146,14 @@ class MenuPanel extends GamePanel
 
     muteButton.setActionCommand("mute");
     muteButton.addActionListener(listener);
+
+    infoButton = new JButton(new ImageIcon("img/infob.png"));
+    infoButton.setBounds(95, 20, 60, 60);
+
+    this.add(infoButton);
+
+    infoButton.setActionCommand("info");
+    infoButton.addActionListener(listener);
 
     imgFileName = "img/StartScreen.png";
     this.loadImg();
