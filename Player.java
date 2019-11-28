@@ -112,7 +112,7 @@ class Player
   {
     playerScore += score;
 
-    if(playerScore < 100) { playerLevel = 3; }
+    if(playerScore < 100) { playerLevel = 1; }
     else if(playerScore < 300)
     {
       playerLevel = 2;
