@@ -99,7 +99,7 @@ class Spawner
     mini_spawn_rate_ms -= 200;
     hearty_spawn_rate_ms -= 200;
     spike_spawn_rate_ms -= 200;
-    tank_spawn_rate_ms
+    tank_spawn_rate_ms -= 200;
   }
 
   public ArrayList<Enemy> spawn()
