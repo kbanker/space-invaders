@@ -115,6 +115,11 @@ public class WindowManager implements ActionListener
         ((MenuPanel) currentPanel).toggleMuteImage();
       }
     }
+    else if(command.equals("info"))
+    {
+      this.updatePanel(new InfoPanel(this));
+      this.resetWindowCursor();
+    }
   }
 
   /**

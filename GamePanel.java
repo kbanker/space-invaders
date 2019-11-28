@@ -61,7 +61,6 @@ Displays the Help Screen
 class HelpPanel extends GamePanel
 {
 
-  private JButton startButton;
   private JButton menuButton;
 
   public HelpPanel(WindowManager listener)
@@ -82,6 +81,75 @@ class HelpPanel extends GamePanel
 }
 
 /**
+Displays the Info Screen
+@author Kush Banker and Jack Basinet
+@version 11.19.19
+*/
+class InfoPanel extends GamePanel
+{
+  private JButton menuButton;
+
+  private JTextArea scoreDisplayTextArea;
+  private JScrollPane scoreDisplayPane;
+
+  public InfoPanel(WindowManager listener)
+  {
+    super(listener);
+
+    menuButton = new JButton(new ImageIcon("img/menu.png"));
+    menuButton.setBounds(605, 20, 175, 65);
+
+    this.add(menuButton);
+
+    menuButton.setActionCommand("menuScreen");
+    menuButton.addActionListener(listener);
+
+    imgFileName = "img/info.png";
+    this.loadImg();
+
+    //High Score Display
+    scoreDisplayTextArea = new JTextArea();
+    scoreDisplayTextArea.setEditable(false);
+
+    scoreDisplayPane = new JScrollPane(scoreDisplayTextArea);
+    scoreDisplayPane.setBounds(500, 320, 180, 200);
+    this.add(scoreDisplayPane);
+
+    scoreDisplayTextArea.setBackground(Color.BLACK);
+    scoreDisplayTextArea.setForeground(Color.WHITE);
+    scoreDisplayTextArea.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+
+    HashMap<Integer, String> scoresAndNames = windowManager.getHighScores();
+    NavigableSet<Integer> scores = (new TreeSet<Integer>(scoresAndNames.keySet())).descendingSet();
+
+    scoreDisplayTextArea.setText("");
+
+    for(Integer score: scores)
+    {
+      scoreDisplayTextArea.append(scoresAndNames.get(score) + ": " + score + "\n");
+    }
+  }
+
+  @Override
+  protected void paintComponent(Graphics g)
+  {
+    super.paintComponent(g);
+
+    //Score and time
+    g.setColor(Color.WHITE);
+
+    g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 9));
+    g.drawString("Space Invaders please don't sue us.", 0, 590);
+
+    g.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
+    g.drawString("Created by:", 400, 160);
+    g.drawString("Jack Basinet and Kush Banker", 400, 200);
+
+    g.drawString("HIGHSCORES:", 500, 300);
+  }
+}
+
+/**
 Displays the Menu
 @author Kush Banker and Jack Basinet
 @version 11.19.19
@@ -91,6 +159,7 @@ class MenuPanel extends GamePanel
   private JButton startButton;
   private JButton helpButton;
   private JButton muteButton;
+  private JButton infoButton;
 
   public MenuPanel(WindowManager listener)
   {
@@ -119,6 +188,14 @@ class MenuPanel extends GamePanel
 
     muteButton.setActionCommand("mute");
     muteButton.addActionListener(listener);
+
+    infoButton = new JButton(new ImageIcon("img/infob.png"));
+    infoButton.setBounds(95, 20, 60, 60);
+
+    this.add(infoButton);
+
+    infoButton.setActionCommand("info");
+    infoButton.addActionListener(listener);
 
     imgFileName = "img/StartScreen.png";
     this.loadImg();
